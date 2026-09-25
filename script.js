@@ -1282,17 +1282,32 @@ zuruecksetzenButton.addEventListener(
 window.addEventListener(
     "keydown",
     (event) => {
+        const taste = event.key.toLowerCase();
+
+        // Die Textur wechseln.
+        if (taste === "t") {
+            event.preventDefault();
+            texturWechseln();
+            return;
+        }
+
+        // Kamera zurücksetzen und die Funktion direkt beenden.
+        // Dadurch wird die Statusmeldung nicht wieder überschrieben.
+        if (taste === "r") {
+            event.preventDefault();
+            kameraZuruecksetzen();
+            return;
+        }
+
         let wurdeBedient = true;
 
         switch (event.key) {
             case "ArrowLeft":
-                kamera.winkel -=
-                    Math.PI / 24;
+                kamera.winkel -= Math.PI / 24;
                 break;
 
             case "ArrowRight":
-                kamera.winkel +=
-                    Math.PI / 24;
+                kamera.winkel += Math.PI / 24;
                 break;
 
             case "ArrowUp":
@@ -1311,22 +1326,6 @@ window.addEventListener(
 
             default:
                 wurdeBedient = false;
-        }
-
-        if (
-            event.key.toLowerCase()
-            === "t"
-        ) {
-            texturWechseln();
-            wurdeBedient = true;
-        }
-
-        if (
-            event.key.toLowerCase()
-            === "r"
-        ) {
-            kameraZuruecksetzen();
-            wurdeBedient = true;
         }
 
         if (wurdeBedient) {
