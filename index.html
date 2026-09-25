@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Ein texturiertes Pinguin-Portal mit einer individuell gestalteten Bildtextur und einer prozedural erzeugten Polarlichttextur."
+    >
+
+    <title>Das Pinguin-Portal – Torustextur</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sprunglink für die Tastaturbedienung -->
+    <a class="sprunglink" href="#hauptinhalt">
+        Direkt zum Inhalt
+    </a>
+
+
+    <!-- Kopfbereich -->
+    <header class="seitenkopf">
+
+        <div class="kopfbereich">
+
+            <div class="kopftext">
+
+                <p class="aufgabenbezeichnung">
+                    Einsendeaufgabe 9
+                </p>
+
+                <h1>Das Pinguin-Portal</h1>
+
+                <p class="einleitung">
+                    Ein Torus wird mit einer individuell gestalteten
+                    Pinguin-Eistextur versehen und verwandelt sich auf
+                    Wunsch in ein mathematisch erzeugtes
+                    Polarlicht-Portal.
+                </p>
+
+            </div>
+
+            <img
+                class="profilbild"
+                src="bilder/ich2.png"
+                alt="Comicfigur von Cassandra Ludwig, die zur Begrüßung winkt"
+                width="174"
+                height="340"
+            >
+
+        </div>
+
+    </header>
+
+
+    <!-- Hauptinhalt -->
+    <main id="hauptinhalt">
+
+        <!-- WebGL-Darstellung -->
+        <section
+            class="darstellungsbereich"
+            aria-labelledby="portalTitel"
+        >
+
+            <div class="abschnittskopf">
+
+                <p class="aufgabenbezeichnung">
+                    Texturen mit WebGL
+                </p>
+
+                <h2 id="portalTitel">
+                    Spuren führen zum Polarlicht
+                </h2>
+
+                <p>
+                    Das Portal trägt zunächst eine individuell
+                    gestaltete Bildtextur mit Pinguinen auf
+                    Eisschollen. Alternativ kann eine prozedurale
+                    Polarlichttextur eingeblendet werden.
+                </p>
+
+            </div>
+
+
+            <div class="canvasbereich">
+
+                <div class="canvasrahmen">
+
+                    <canvas
+                        id="webglCanvas"
+                        width="900"
+                        height="620"
+                        aria-label="WebGL-Szene mit einem texturierten Torus und zwei Pinguinen"
+                    >
+                        Dein Browser unterstützt das benötigte
+                        Canvas-Element leider nicht.
+                    </canvas>
+
+                </div>
+
+
+                <!-- Persönliche Notiz -->
+                <aside
+                    class="portalnotiz"
+                    aria-label="Hinweis zu den beiden Texturen"
+                >
+
+                    <span
+                        class="klebeband"
+                        aria-hidden="true"
+                    ></span>
+
+                    <h3>Ein Ring – zwei Welten</h3>
+
+                    <p>
+                        <span
+                            class="notizsymbol bildsymbol"
+                            aria-hidden="true"
+                        >
+                            ●
+                        </span>
+
+                        Bildtextur:
+                        Pinguine auf Eisschollen
+                    </p>
+
+                    <p>
+                        <span
+                            class="notizsymbol lichtsymbol"
+                            aria-hidden="true"
+                        >
+                            ●
+                        </span>
+
+                        Prozedural:
+                        Polarlicht direkt aus dem Shader
+                    </p>
+
+                    <strong>
+                        Wohin führt das Portal?
+                    </strong>
+
+                </aside>
+
+            </div>
+
+
+            <!-- Statusmeldung von WebGL -->
+            <p
+                id="webglStatus"
+                class="statusanzeige"
+                role="status"
+                aria-live="polite"
+            >
+                WebGL und die Bildtextur werden vorbereitet …
+            </p>
+
+
+            <!-- Steuerung -->
+            <div class="steuerungsraster">
+
+                <article class="steuerungskarte">
+
+                    <h3>Textur wechseln</h3>
+
+                    <p>
+                        Wechsle zwischen der individuell gestalteten
+                        Pinguin-Bildtextur und dem mathematisch
+                        erzeugten Polarlichtmuster.
+                    </p>
+
+                    <button
+                        id="texturButton"
+                        type="button"
+                    >
+                        Polarlichttextur zeigen
+                    </button>
+
+                    <p
+                        id="texturStatus"
+                        class="kleiner-status"
+                        aria-live="polite"
+                    >
+                        Aktuell: Pinguin-Bildtextur
+                    </p>
+
+                </article>
+
+
+                <article class="steuerungskarte">
+
+                    <h3>Portal ansehen</h3>
+
+                    <p>
+                        Mit den Pfeiltasten lässt sich die Kamera um
+                        das Portal und die beiden Pinguine bewegen.
+                    </p>
+
+                    <button
+                        id="zuruecksetzenButton"
+                        type="button"
+                    >
+                        Ansicht zurücksetzen
+                    </button>
+
+                    <p
+                        id="kameraStatus"
+                        class="kleiner-status"
+                        aria-live="polite"
+                    >
+                        Kamera: Ausgangsposition
+                    </p>
+
+                </article>
+
+            </div>
+
+
+            <!-- Liste der Tastaturinteraktionen -->
+            <section
+                class="bedienung"
+                aria-labelledby="bedienungTitel"
+            >
+
+                <h3 id="bedienungTitel">
+                    Bedienung
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <kbd>←</kbd>
+                        dreht die Kamera nach links.
+                    </li>
+
+                    <li>
+                        <kbd>→</kbd>
+                        dreht die Kamera nach rechts.
+                    </li>
+
+                    <li>
+                        <kbd>↑</kbd>
+                        bewegt die Kamera etwas nach oben.
+                    </li>
+
+                    <li>
+                        <kbd>↓</kbd>
+                        bewegt die Kamera etwas nach unten.
+                    </li>
+
+                    <li>
+                        <kbd>T</kbd>
+                        wechselt zwischen Bildtextur und
+                        Polarlichttextur.
+                    </li>
+
+                    <li>
+                        <kbd>R</kbd>
+                        setzt die Kamera auf ihre Ausgangsposition
+                        zurück.
+                    </li>
+
+                </ul>
+
+                <p>
+                    Alle Funktionen können zusätzlich über die
+                    sichtbaren Schaltflächen bedient werden.
+                </p>
+
+            </section>
+
+        </section>
+
+
+        <!-- Persönlicher Bezug -->
+        <section
+            class="bedeutung"
+            aria-labelledby="bedeutungTitel"
+        >
+
+            <div class="abschnittskopf">
+
+                <p class="aufgabenbezeichnung">
+                    Persönliche Gestaltung
+                </p>
+
+                <h2 id="bedeutungTitel">
+                    Das Portal zwischen Eis und Polarlicht
+                </h2>
+
+                <p>
+                    Die Bildtextur verbindet meine Pinguinwelt mit
+                    einer kleinen Reise ins Unbekannte. Die zweite
+                    Oberfläche zeigt, wie aus mathematischen
+                    Berechnungen eine ganz andere Stimmung entsteht.
+                </p>
+
+            </div>
+
+
+            <div class="bedeutungsraster">
+
+                <article class="bedeutungskarte">
+
+                    <span
+                        class="farbpunkt punkt-orange"
+                        aria-hidden="true"
+                    ></span>
+
+                    <h3>Die Pinguinwelt</h3>
+
+                    <p>
+                        Die Bildtextur zeigt mehrere Pinguine in
+                        unterschiedlichen Posen auf kleinen
+                        Eisschollen. Durch die Wiederholung der Motive
+                        bleibt die Gestaltung auch auf der gekrümmten
+                        Oberfläche des Torus gut erkennbar.
+                    </p>
+
+                </article>
+
+
+                <article class="bedeutungskarte">
+
+                    <span
+                        class="farbpunkt punkt-tuerkis"
+                        aria-hidden="true"
+                    ></span>
+
+                    <h3>Die Eiswelt</h3>
+
+                    <p>
+                        Kräftige Türkis- und Blautöne, helle
+                        Eisschollen, Schneeflocken und die
+                        orangefarbenen Füße der Pinguine bilden eine
+                        lebendige Eiswelt.
+                    </p>
+
+                </article>
+
+
+                <article class="bedeutungskarte">
+
+                    <span
+                        class="farbpunkt punkt-rosa"
+                        aria-hidden="true"
+                    ></span>
+
+                    <h3>Das Polarlicht</h3>
+
+                    <p>
+                        Die zweite Oberfläche wird ohne Bilddatei
+                        direkt im Fragment-Shader aus Farben und
+                        Sinusfunktionen berechnet.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Dokumentation -->
+        <section
+            class="dokumentation"
+            aria-labelledby="dokumentationTitel"
+        >
+
+            <div class="abschnittskopf">
+
+                <p class="aufgabenbezeichnung">
+                    Informationen zur Umsetzung
+                </p>
+
+                <h2 id="dokumentationTitel">
+                    Dokumentation
+                </h2>
+
+                <p>
+                    Wie die Bildtextur, die Texturkoordinaten und die
+                    prozedurale Erweiterung umgesetzt wurden.
+                </p>
+
+            </div>
+
+
+            <div class="dokumentationsraster">
+
+                <article class="dokumentationskarte">
+
+                    <h3>Idee und Gestaltung</h3>
+
+                    <p>
+                        Für diese Aufgabe wollte ich mein
+                        Pinguinmotiv weiterführen und gleichzeitig den
+                        Torus deutlich in den Mittelpunkt stellen.
+                        Deshalb verwende ich ihn als Portal zwischen
+                        einer Eiswelt und einem Polarlicht.
+                    </p>
+
+                    <p>
+                        Die Pinguine stehen vor dem Ring und geben der
+                        technischen Darstellung einen persönlichen
+                        Rahmen. Die Textur des Torus bleibt dabei das
+                        wichtigste Element der Szene.
+                    </p>
+
+                </article>
+
+
+                <article class="dokumentationskarte">
+
+                    <h3>Meine Bildtextur</h3>
+
+                    <p>
+                        Die Bildtextur wurde nach meiner
+                        Gestaltungsidee mit Unterstützung eines
+                        KI-gestützten Bildgenerators erstellt. Dafür
+                        habe ich Motiv, Farbwelt und Aufbau passend
+                        zum Pinguin-Portal festgelegt.
+                    </p>
+
+                    <p>
+                        Das quadratische Bild zeigt verschiedene
+                        Pinguine auf Eisschollen und ist über die von
+                        mir programmierten Texturkoordinaten auf den
+                        Torus gelegt. Die Einbindung, Anpassung und
+                        Prüfung in WebGL habe ich selbst umgesetzt.
+                    </p>
+
+                </article>
+
+
+                <article class="dokumentationskarte">
+
+                    <h3>Texturkoordinaten und Mapping</h3>
+
+                    <p>
+                        Bei der Berechnung des Torus erhält jeder
+                        Vertex neben seiner räumlichen Position und
+                        seiner Normalen auch zwei Texturkoordinaten.
+                        Diese Werte werden als
+                        <code>u</code> und <code>v</code>
+                        gespeichert.
+                    </p>
+
+                    <p>
+                        Der Vertex-Shader übergibt die Koordinaten an
+                        den Fragment-Shader. Dort wird die passende
+                        Farbe aus der geladenen Bildtextur gelesen und
+                        auf die Oberfläche des Torus übertragen.
+                    </p>
+
+                </article>
+
+
+                <article class="dokumentationskarte">
+
+                    <h3>Prozedurale Erweiterung</h3>
+
+                    <p>
+                        Als Erweiterung habe ich eine prozedurale
+                        Polarlichttextur umgesetzt. Sie benötigt keine
+                        zusätzliche Bilddatei, da ihre Farben direkt im
+                        Fragment-Shader berechnet werden.
+                    </p>
+
+                    <p>
+                        Mehrere Sinusfunktionen verändern die
+                        Farbbereiche abhängig von den
+                        Texturkoordinaten. Dadurch entstehen
+                        geschwungene Bänder aus Dunkelblau, Türkis,
+                        Eisblau und Rosa.
+                    </p>
+
+                    <p>
+                        Mit der Taste <kbd>T</kbd> oder dem sichtbaren
+                        Button kann jederzeit zwischen beiden
+                        Texturen gewechselt und wieder zurückgeschaltet
+                        werden.
+                    </p>
+
+                </article>
+
+
+                <article class="dokumentationskarte">
+
+                    <h3>Kamera und Bedienung</h3>
+
+                    <p>
+                        Die Kamera bewegt sich mit den Pfeiltasten um
+                        die Szene. Dabei werden ihr Winkel und ihre
+                        Höhe verändert, während sie weiterhin auf die
+                        Mitte des Portals gerichtet bleibt.
+                    </p>
+
+                    <p>
+                        Zusätzlich lassen sich die Textur und die
+                        Ausgangsansicht über gut sichtbare Buttons
+                        steuern. Statusmeldungen zeigen den aktuell
+                        gewählten Modus an.
+                    </p>
+
+                </article>
+
+
+                <article class="dokumentationskarte">
+
+                    <h3>Quellen, Hilfsmittel und Prüfung</h3>
+
+                    <p>
+                        Grundlage für den Torus, die
+                        Texturkoordinaten und das Laden einer
+                        Bildtextur war die Lerneinheit TXR des
+                        Kursmaterials.
+                    </p>
+
+                    <p>
+                        Für die Erstellung der Bildtextur wurde
+                        ergänzend ein KI-gestützter Bildgenerator
+                        verwendet. Die Gestaltungsidee, das
+                        Pinguinmotiv und die Farbwelt wurden für
+                        dieses Projekt festgelegt. Das Ergebnis habe
+                        ich ausgewählt, als Textur eingebunden und
+                        anschließend aus verschiedenen
+                        Kamerapositionen getestet.
+                    </p>
+
+                    <p>
+                        Die Webseite ist Schritt für Schritt in Visual
+                        Studio Code entstanden und wurde während der
+                        Umsetzung mehrfach an meine Gestaltungsidee
+                        angepasst. Bei einzelnen Fragen zur
+                        Seitenstruktur, zu JavaScript und bei der
+                        Fehlersuche habe ich ergänzend ein
+                        KI-gestütztes Sprachmodell genutzt.
+                        Verwendete Hinweise habe ich nachvollzogen,
+                        selbst angepasst und anschließend in der
+                        fertigen Anwendung getestet.
+                    </p>
+
+                    <p>
+                        Die Bedienung mit Tastatur und Buttons, beide
+                        Texturarten und die Kamerabewegung wurden in
+                        Google Chrome getestet. Zusätzlich wurde die
+                        Entwicklerkonsole auf Fehlermeldungen geprüft.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Slideshow zum Entstehungsprozess -->
+        <section
+            class="entstehung"
+            aria-labelledby="entstehungTitel"
+        >
+
+            <div class="abschnittskopf">
+
+                <p class="aufgabenbezeichnung">
+                    Entstehungsprozess
+                </p>
+
+                <h2 id="entstehungTitel">
+                    Schritt für Schritt zum Pinguin-Portal
+                </h2>
+
+                <p>
+                    Eigene Screenshots zeigen, wie die Bildtextur
+                    eingebunden, auf den Torus übertragen und durch
+                    die prozedurale Polarlichttextur ergänzt wurde.
+                </p>
+
+            </div>
+
+
+            <div
+                id="slideshow"
+                class="slideshow"
+            >
+
+                <img
+                    id="slideshowBild"
+                    src="bilder/entwicklung/schritt_01.png"
+                    alt="Erster Entwicklungsschritt des Pinguin-Portals"
+                >
+
+                <p
+                    id="bildZaehler"
+                    class="schrittzaehler"
+                >
+                    Bild 1 von 4
+                </p>
+
+                <h3 id="bildTitel">
+                    Die Pinguin-Bildtextur
+                </h3>
+
+                <p
+                    id="bildBeschreibung"
+                    class="schrittbeschreibung"
+                >
+                    Der erste Schritt zeigt die ausgewählte
+                    Bildtextur mit verschiedenen Pinguinen,
+                    Eisschollen und Schneeflocken.
+                </p>
+
+                <div
+                    id="bildpunkte"
+                    class="schrittpunkte"
+                    aria-label="Bilder der Slideshow"
+                ></div>
+
+                <div class="slideshow-steuerung">
+
+                    <button
+                        id="zurueckButton"
+                        type="button"
+                    >
+                        Zurück
+                    </button>
+
+                    <button
+                        id="weiterButton"
+                        type="button"
+                    >
+                        Weiter
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Fußbereich -->
+    <footer class="seitenfuss">
+
+        <p>
+            EA 9 · Torustextur
+        </p>
+
+        <p>
+            Erstellt von Cassandra Ludwig
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

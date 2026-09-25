@@ -1,0 +1,823 @@
+/* Grundfarben der Webseite */
+:root {
+    --dunkelblau: #15344d;
+    --mittelblau: #20516a;
+    --tuerkis: #2c9998;
+    --helltuerkis: #a9e2df;
+    --orange: #f28b31;
+    --rosa: #e6788d;
+    --eisblau: #dff7f6;
+    --hintergrund: #f5f9fc;
+    --text: #243b50;
+    --rahmen: #d5e2ec;
+}
+
+
+/* Einheitliche Größenberechnung */
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    margin: 0;
+    background: var(--hintergrund);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+
+button {
+    font: inherit;
+}
+
+
+a {
+    color: #135f78;
+}
+
+
+a:hover {
+    color: #a94b18;
+}
+
+
+a:focus-visible,
+button:focus-visible,
+.sprunglink:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 4px;
+}
+
+
+/* Sprunglink für die Tastaturbedienung */
+.sprunglink {
+    position: absolute;
+    top: -80px;
+    left: 20px;
+    z-index: 20;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: white;
+    color: var(--dunkelblau);
+    font-weight: bold;
+}
+
+
+.sprunglink:focus {
+    top: 16px;
+}
+
+
+/* Kopfbereich */
+.seitenkopf {
+    min-height: 300px;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 88% 85%,
+            transparent 0 90px,
+            rgb(255 255 255 / 10%) 91px 93px,
+            transparent 94px
+        ),
+        linear-gradient(
+            115deg,
+            var(--dunkelblau),
+            var(--mittelblau),
+            #287b83
+        );
+    color: white;
+}
+
+
+.kopfbereich {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: min(1180px, calc(100% - 40px));
+    min-height: 300px;
+    margin: 0 auto;
+    padding: 38px 220px 75px 0;
+}
+
+
+.kopftext {
+    max-width: 720px;
+}
+
+
+.kopfbereich h1 {
+    margin: 8px 0 12px;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1.12;
+}
+
+
+.einleitung {
+    max-width: 690px;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+
+.profilbild {
+    position: absolute;
+    right: 30px;
+    bottom: 48px;
+    width: auto;
+    height: 245px;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+
+.aufgabenbezeichnung {
+    margin: 0;
+    color: #c5672a;
+    font-size: 0.76rem;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+
+.seitenkopf .aufgabenbezeichnung {
+    color: var(--helltuerkis);
+}
+
+
+/* Allgemeiner Inhaltsbereich */
+main {
+    position: relative;
+    width: min(1180px, calc(100% - 40px));
+    margin: -38px auto 80px;
+}
+
+
+.darstellungsbereich,
+.bedeutung,
+.dokumentation {
+    padding: 32px;
+    border: 1px solid var(--rahmen);
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 10px 28px rgb(21 52 77 / 9%);
+}
+
+
+.darstellungsbereich {
+    border-top: 5px solid var(--tuerkis);
+}
+
+
+.bedeutung,
+.dokumentation,
+.entstehung {
+    margin-top: 42px;
+}
+
+
+.abschnittskopf {
+    max-width: 800px;
+    margin: 0 auto 28px;
+    text-align: center;
+}
+
+
+.abschnittskopf h2 {
+    margin: 7px 0;
+    color: var(--dunkelblau);
+    font-size: clamp(1.6rem, 3vw, 2.15rem);
+    line-height: 1.2;
+}
+
+
+.abschnittskopf > p:last-child {
+    margin: 0;
+}
+
+
+/* Canvas und WebGL-Darstellung */
+.canvasbereich {
+    position: relative;
+    width: min(900px, calc(100% - 190px));
+    margin: 0 auto;
+}
+
+
+.canvasrahmen {
+    overflow: hidden;
+    border: 2px solid var(--dunkelblau);
+    border-radius: 16px;
+    background:
+        radial-gradient(
+            circle at center,
+            #faffff 0%,
+            #dff7f6 65%,
+            #c5ebed 100%
+        );
+    box-shadow: 0 12px 24px rgb(21 52 77 / 12%);
+}
+
+
+.canvasrahmen canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/* Post-it neben dem Canvas */
+.portalnotiz {
+    position: absolute;
+    top: 28px;
+    right: -182px;
+    z-index: 3;
+    width: 205px;
+    padding: 30px 18px 20px;
+    border: 1px solid #ddb84d;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0 27px,
+            rgb(74 107 125 / 16%) 28px 29px
+        ),
+        #fff1a8;
+    color: #35434c;
+    box-shadow: 0 10px 22px rgb(21 52 77 / 18%);
+    transform: rotate(2deg);
+}
+
+
+.portalnotiz::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-top: 20px solid #efd56f;
+    border-right: 20px solid white;
+    content: "";
+}
+
+
+.klebeband {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 92px;
+    height: 24px;
+    background: rgb(255 255 255 / 62%);
+    box-shadow: 0 2px 4px rgb(21 52 77 / 10%);
+    transform: translateX(-50%) rotate(-2deg);
+}
+
+
+.portalnotiz h3 {
+    margin: 0 0 10px;
+    color: var(--dunkelblau);
+    font-size: 1.05rem;
+    text-align: center;
+}
+
+
+.portalnotiz p {
+    margin: 6px 0;
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+
+.portalnotiz strong {
+    display: block;
+    margin-top: 14px;
+    color: var(--dunkelblau);
+    font-size: 0.78rem;
+    text-align: center;
+}
+
+
+.notizsymbol {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+
+.bildsymbol {
+    color: var(--orange);
+}
+
+
+.lichtsymbol {
+    color: var(--tuerkis);
+}
+
+
+/* Statusmeldung */
+.statusanzeige {
+    width: fit-content;
+    max-width: 100%;
+    margin: 25px auto 0;
+    padding: 8px 16px;
+    border: 1px solid #a7d9c8;
+    border-radius: 30px;
+    background: #effaf4;
+    color: #196046;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+
+/* Karten für die Steuerung */
+.steuerungsraster {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    width: min(900px, 100%);
+    margin: 26px auto 0;
+}
+
+
+.steuerungskarte {
+    padding: 19px 21px;
+    border: 1px solid var(--rahmen);
+    border-top: 4px solid var(--tuerkis);
+    border-radius: 12px;
+    background: #fbfdff;
+}
+
+
+.steuerungskarte:nth-child(2) {
+    border-top-color: var(--orange);
+}
+
+
+.steuerungskarte h3 {
+    margin: 0 0 7px;
+    color: var(--dunkelblau);
+    font-size: 1.05rem;
+}
+
+
+.steuerungskarte > p {
+    margin: 0 0 13px;
+    font-size: 0.91rem;
+}
+
+
+.steuerungskarte button,
+.slideshow-steuerung button {
+    min-height: 44px;
+    padding: 9px 18px;
+    border: 2px solid var(--dunkelblau);
+    border-radius: 8px;
+    background: var(--dunkelblau);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s,
+        transform 0.2s;
+}
+
+
+.steuerungskarte:first-child button {
+    border-color: var(--orange);
+    box-shadow: inset 0 0 0 1px var(--orange);
+}
+
+
+.steuerungskarte button:hover,
+.slideshow-steuerung button:hover {
+    background: var(--mittelblau);
+    transform: translateY(-2px);
+}
+
+
+.steuerungskarte button:active,
+.slideshow-steuerung button:active {
+    transform: translateY(0);
+}
+
+
+.kleiner-status {
+    width: fit-content;
+    max-width: 100%;
+    margin: 10px 0 0 !important;
+    padding: 4px 9px;
+    border: 1px solid #b8dce3;
+    border-radius: 20px;
+    background: #eef9fb;
+    color: var(--dunkelblau);
+    font-size: 0.79rem !important;
+}
+
+
+/* Bedienung */
+.bedienung {
+    width: min(900px, 100%);
+    margin: 20px auto 0;
+    padding: 19px 22px;
+    border-left: 4px solid var(--orange);
+    border-radius: 8px;
+    background: #fff8ed;
+}
+
+
+.bedienung h3 {
+    margin: 0 0 10px;
+    color: var(--dunkelblau);
+    font-size: 1rem;
+}
+
+
+.bedienung ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 22px;
+    margin: 0;
+    padding-left: 22px;
+}
+
+
+.bedienung li {
+    font-size: 0.9rem;
+}
+
+
+.bedienung p {
+    margin: 12px 0 0;
+    font-size: 0.85rem;
+}
+
+
+kbd {
+    display: inline-block;
+    min-width: 27px;
+    padding: 1px 6px;
+    border: 1px solid #b7c8d3;
+    border-bottom-width: 3px;
+    border-radius: 5px;
+    background: #f2f6f9;
+    color: var(--dunkelblau);
+    font-family: inherit;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* Persönliche Bedeutung */
+.bedeutung {
+    border-top: 5px solid var(--rosa);
+}
+
+
+.bedeutungsraster {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+
+.bedeutungskarte {
+    position: relative;
+    padding: 20px;
+    border: 1px solid var(--rahmen);
+    border-radius: 11px;
+    background: #fbfdff;
+}
+
+
+.bedeutungskarte h3 {
+    margin: 0 0 8px;
+    color: var(--dunkelblau);
+    font-size: 1rem;
+}
+
+
+.bedeutungskarte p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+
+.farbpunkt {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+}
+
+
+.punkt-orange {
+    background: var(--orange);
+}
+
+
+.punkt-tuerkis {
+    background: var(--tuerkis);
+}
+
+
+.punkt-rosa {
+    background: var(--rosa);
+}
+
+
+/* Dokumentation */
+.dokumentation {
+    border-top: 5px solid var(--orange);
+}
+
+
+.dokumentationsraster {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+
+.dokumentationskarte {
+    padding: 19px 21px;
+    border: 1px solid var(--rahmen);
+    border-top: 3px solid var(--tuerkis);
+    border-radius: 11px;
+    background: #fbfdff;
+}
+
+
+.dokumentationskarte:nth-child(2) {
+    border-top-color: var(--orange);
+}
+
+
+.dokumentationskarte:nth-child(3) {
+    border-top-color: var(--rosa);
+}
+
+
+.dokumentationskarte:nth-child(4) {
+    border-top-color: var(--dunkelblau);
+}
+
+
+.dokumentationskarte:nth-child(5) {
+    border-top-color: var(--tuerkis);
+}
+
+
+.dokumentationskarte:nth-child(6) {
+    border-top-color: var(--orange);
+}
+
+
+.dokumentationskarte h3 {
+    margin: 0 0 10px;
+    color: var(--dunkelblau);
+    font-size: 1.05rem;
+}
+
+
+.dokumentationskarte p {
+    margin: 0 0 11px;
+    font-size: 0.92rem;
+}
+
+
+.dokumentationskarte p:last-child {
+    margin-bottom: 0;
+}
+
+
+code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: #eaf2f7;
+    color: #0f526b;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.88em;
+}
+
+
+/* Slideshow */
+.entstehung {
+    padding: 10px 0 0;
+}
+
+
+.slideshow {
+    width: min(820px, 100%);
+    margin: 0 auto;
+    padding: 18px;
+    border: 1px solid var(--rahmen);
+    border-top: 4px solid var(--tuerkis);
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 8px 22px rgb(21 52 77 / 8%);
+    text-align: center;
+}
+
+
+.slideshow img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    border: 1px solid var(--rahmen);
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+
+.schrittzaehler {
+    margin: 14px 0 4px;
+    color: #247b7b;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+
+.slideshow h3 {
+    margin: 3px 0 5px;
+    color: var(--dunkelblau);
+    font-size: 1.2rem;
+}
+
+
+.schrittbeschreibung {
+    margin: 0 0 14px;
+}
+
+
+.schrittpunkte {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 16px 0 20px;
+}
+
+
+.schrittpunkt {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 2px solid var(--dunkelblau);
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+
+.schrittpunkt[aria-current="true"] {
+    background: var(--dunkelblau);
+    transform: scale(1.15);
+}
+
+
+.schrittpunkt:hover {
+    background: var(--tuerkis);
+}
+
+
+.schrittpunkt:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 4px;
+}
+
+
+.slideshow-steuerung {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+
+.slideshow-steuerung button {
+    min-width: 110px;
+    background: white;
+    color: var(--dunkelblau);
+}
+
+
+.slideshow-steuerung button:hover {
+    background: var(--dunkelblau);
+    color: white;
+}
+
+
+.slideshow-steuerung button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* Fußbereich */
+.seitenfuss {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 18px max(20px, calc((100% - 1180px) / 2));
+    background: var(--dunkelblau);
+    color: white;
+    font-size: 0.85rem;
+}
+
+
+.seitenfuss p {
+    margin: 0;
+}
+
+
+/* Post-it unter das Canvas verschieben */
+@media (max-width: 1250px) {
+    .canvasbereich {
+        width: min(900px, 100%);
+    }
+
+    .portalnotiz {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: min(370px, calc(100% - 28px));
+        margin: -10px 14px 20px auto;
+        transform: rotate(1deg);
+    }
+}
+
+
+/* Tablet */
+@media (max-width: 800px) {
+    .bedeutungsraster {
+        grid-template-columns: 1fr;
+    }
+
+    .steuerungsraster,
+    .dokumentationsraster {
+        grid-template-columns: 1fr;
+    }
+
+    .bedienung ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Smartphone */
+@media (max-width: 650px) {
+    .kopfbereich {
+        min-height: 330px;
+        padding: 28px 105px 42px 0;
+    }
+
+    .profilbild {
+        right: 0;
+        bottom: 30px;
+        height: 175px;
+    }
+
+    main {
+        width: min(100% - 24px, 1180px);
+        margin-top: -24px;
+    }
+
+    .darstellungsbereich,
+    .bedeutung,
+    .dokumentation {
+        padding: 22px 15px;
+    }
+
+    .portalnotiz {
+        width: calc(100% - 12px);
+        margin-right: 6px;
+    }
+
+    .bedienung {
+        padding: 17px;
+    }
+
+    .slideshow {
+        padding: 12px;
+    }
+
+    .slideshow-steuerung button {
+        min-width: 95px;
+        padding: 8px 12px;
+    }
+
+    .seitenfuss {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
