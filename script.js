@@ -1118,21 +1118,7 @@ const texturBild =
 texturBild.addEventListener(
     "load",
     () => {
-        /*
-         * Das geladene Bild wird zuerst
-         * auf eine unsichtbare Canvasfläche
-         * mit 512 × 512 Pixeln gezeichnet.
-         *
-         * Dadurch besitzt die WebGL-Textur
-         * garantiert eine Zweierpotenz.
-         * REPEAT und Mipmaps funktionieren
-         * somit auch dann, wenn Inkscape das
-         * PNG in einer leicht abweichenden
-         * Größe exportiert hat.
-         *
-         * Diese Korrektur verhindert den
-         * zuvor schwarzen Torus.
-         */
+
         const texturFlaeche =
             document.createElement(
                 "canvas"
